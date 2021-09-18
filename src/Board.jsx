@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { Paper, Box } from "@mui/material";
+import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
+import CloseIcon from "@mui/icons-material/Close";
 
 const checkWin = (board, count) => {
   const checkRow = (row) => row.reduce((a, b) => (a === b && a !== "_" ? a : false));
@@ -52,18 +55,28 @@ const Board = () => {
   };
 
   return (
-    <div>
-      <table>
+    <Paper>
+      <div>
         {board.map((row, x) => (
-          <tr>
+          <Box display="flex" flexDirection="row" justifyContent="center">
             {row.map((item, y) => (
-              <td onClick={() => handleClick(x, y)}>{item}</td>
+              <Paper onClick={() => handleClick(x, y)}>
+                <Box width={100} height={100} m="auto">
+                  {
+                    {
+                      o: <CircleOutlinedIcon fontSize="large" />,
+                      x: <CloseIcon fontSize="large" />,
+                      _: ""
+                    }[item]
+                  }
+                </Box>
+              </Paper>
             ))}
-          </tr>
+          </Box>
         ))}
-      </table>
+      </div>
       {win !== false ? <h2>wygral {win}</h2> : " "}
-    </div>
+    </Paper>
   );
 };
 
