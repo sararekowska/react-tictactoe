@@ -4,7 +4,8 @@ import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 
 const checkWin = (board, count) => {
-  const checkRow = (row) => row.reduce((a, b) => (a === b && a !== "_" ? a : false));
+  const checkRow = (row) =>
+    row.reduce((a, b) => (a === b && a !== "_" ? a : false));
 
   const columnsChecked = board[0].map((current, index) =>
     board.reduce(
@@ -15,9 +16,17 @@ const checkWin = (board, count) => {
 
   const element = count % 2 === 0 ? "o" : "x";
 
-  if (board[0][0] === board[1][1] && board[1][1] === board[2][2] && board[0][0] !== "_") {
+  if (
+    board[0][0] === board[1][1] &&
+    board[1][1] === board[2][2] &&
+    board[0][0] !== "_"
+  ) {
     return element;
-  } else if (board[2][0] === board[1][1] && board[2][0] === board[0][2] && board[2][0] !== "_") {
+  } else if (
+    board[2][0] === board[1][1] &&
+    board[2][0] === board[0][2] &&
+    board[2][0] !== "_"
+  ) {
     return element;
   } else if (board.filter(checkRow).length !== 0) {
     return element;
@@ -32,7 +41,7 @@ const Board = () => {
   const [board, setBoard] = useState([
     ["_", "_", "_"],
     ["_", "_", "_"],
-    ["_", "_", "_"]
+    ["_", "_", "_"],
   ]);
   const [count, setCount] = useState(0);
   const win = checkWin(board, count);
@@ -57,25 +66,47 @@ const Board = () => {
   return (
     <Paper>
       <div>
-        {board.map((row, x) => (
-          <Box display="flex" flexDirection="row" justifyContent="center">
-            {row.map((item, y) => (
-              <Paper onClick={() => handleClick(x, y)}>
-                <Box width={100} height={100} m="auto">
-                  {
+        <Box
+          display="flex"
+          justifyContent="center"
+          backgroundColor="#FFB6C1"
+          paddingTop={6}
+          paddingBottom={4}
+        >
+          {board.map((row, x) => (
+            <Box>
+              {row.map((item, y) => (
+                <Paper onClick={() => handleClick(x, y)}>
+                  <Box
+                    width={100}
+                    height={100}
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    border="1px solid grey"
+                  >
                     {
-                      o: <CircleOutlinedIcon fontSize="large" />,
-                      x: <CloseIcon fontSize="large" />,
-                      _: ""
-                    }[item]
-                  }
-                </Box>
-              </Paper>
-            ))}
-          </Box>
-        ))}
+                      {
+                        o: (
+                          <CircleOutlinedIcon
+                            fontSize="large"
+                            htmlColor="#FFB6C1"
+                          />
+                        ),
+                        x: <CloseIcon fontSize="large" htmlColor="#FFB6C1" />,
+                        _: "",
+                      }[item]
+                    }
+                  </Box>
+                </Paper>
+              ))}
+            </Box>
+          ))}
+        </Box>
       </div>
-      {win !== false ? <h2>wygral {win}</h2> : " "}
+      <Box display="flex" justifyContent="center" backgroundColor="#FFB6C1">
+        {win !== false ? <h2>Winner: {win}</h2> : " "}
+      </Box>
     </Paper>
   );
 };
