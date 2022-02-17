@@ -3,7 +3,7 @@ import { Paper, Box } from "@mui/material";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckWin from "../CheckWin/CheckWin";
-import "./Board.css";
+import styles from "./Board.module.scss";
 
 const Board = () => {
   const [board, setBoard] = useState([
@@ -34,7 +34,7 @@ const Board = () => {
   return (
     <Paper>
       <div>
-        <Box className="board">
+        <Box className={styles["board"]}>
           {board.map((row: any[], x: any) => (
             <Box>
               {row.map((item: string | number, y: any) => (
@@ -66,7 +66,7 @@ const Board = () => {
           ))}
         </Box>
       </div>
-      <Box className="winner">
+      <Box className={styles["winner"]}>
         {win !== false ? <h2>Winner: {win}</h2> : " "}
       </Box>
     </Paper>
