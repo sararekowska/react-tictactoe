@@ -1,0 +1,13 @@
+.board {
+  display: flex;
+  justify-content: center;
+  background-color: #ffb6c1;
+  padding-top: 6em;
+  padding-bottom: 4em;
+}
+
+.winner {
+  display: flex;
+  justify-content: center;
+  background-color: #ffb6c1;
+}

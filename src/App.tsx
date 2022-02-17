@@ -1,5 +1,4 @@
-import "./App.css";
-import Board from "./Board";
+import Board from "./components/Board/Board";
 import Container from "@mui/material/Container";
 
 function App() {
